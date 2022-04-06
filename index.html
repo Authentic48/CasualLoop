@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input {
+            width: 300px;
+            margin: 25px auto;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid black;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);;
+        }
+
+        .input p {
+            font-family: 'Montserrat', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+            margin: 10px;
+            /* identical to box height */
+            color: white;
+        }
+
+        input {
+            padding: 8px;
+            margin: 10px;
+            border-radius: 8px;
+        }
+
+        input:focus {
+            outline: none;
+
+        }
+
+        button {
+            background-color: #e7e7e7; /* Green */
+            border: black;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .output {
+            margin: 0 auto;
+
+            width: 300px;
+            height: 300px;
+            padding: 20px;
+        }
+
+        .output p {
+            font-family: 'Montserrat', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+            margin: 10px;
+            /* identical to box height */
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="input">
+        <p>Enter your price per visitor</p>
+        <input type="number" class="pricePerVisitor">
+        <p>Enter number of visitors</p>
+        <input type="number" class="visitorsNum">
+        <button type="submit" class="btn">Submit</button>
+    </div>
+
+    <div class="output">
+        <div class="rev"></div>
+        <div class="exp"></div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+    let btn = document.querySelector('.btn');
+    let visitorsNumber = document.querySelector('.visitorsNum');
+    let pricePerVisitor = document.querySelector('.pricePerVisitor');
+    let rev = document.querySelector('.rev');
+    let exp = document.querySelector('.exp');
+
+    let quality;
+    let numberStaff;
+    let salary;
+    let profit;
+    let hotelExp;
+    let expenses;
+
+    btn.addEventListener('click', function () {
+
+
+        if(pricePerVisitor.value < 50 || Number(visitorsNumber.value) === 0 ){
+            alert("incorrect values");
+        }
+        else{
+
+            while (rev.firstChild) {
+                rev.removeChild(rev.firstChild);
+            }
+
+            while (exp.firstChild){
+                exp.removeChild(exp.firstChild);
+            }
+
+            quality = Math.floor(Math.random() * 2) + 1;
+            salary = Math.floor(Math.random() * pricePerVisitor.value) + 1;
+            numberStaff = Math.floor(Math.random() * visitorsNumber.value) + 1;
+            hotelExp = Math.floor(Math.random() * 5) + 2;
+            profit = pricePerVisitor.value * visitorsNumber.value * quality;
+            expenses = salary * numberStaff * hotelExp;
+
+            //create p tags
+            let Profit = document.createElement('p');
+            Profit.textContent = `your profit is ${profit}`;
+
+            let expense = document.createElement('p');
+            expense.textContent = `your expenses are ${expenses}`
+
+            //append child
+            rev.appendChild(Profit);
+            exp.appendChild(expense);
+
+        }
+
+    });
+
+
+</script>
+</body>
+</html>
